@@ -5,6 +5,7 @@
 const NMOVIES = 5
 const NELEMENTSPMOVIE = 3
 let index = 1
+let peliPortada="01M";
 
 const getElementsDeck = () => {
     let elementDeck = []
@@ -21,7 +22,7 @@ const getElementsDeck = () => {
 const getMovie = () => {
     const movie = `0${index + 1}M`
     index++
-
+    peliPortada=movie
     if (index >= NMOVIES) {
         index = 0
     }
@@ -56,6 +57,9 @@ btNuevoJuego.addEventListener('click', function (event) {
 
 
 
+const pertenecePelicula = (recurso, pelicula) => {
+    return recurso.substring(0, 2) === pelicula.substring(0, 2)
+}
 
 btAdivina.addEventListener('click', function (event) {
     const elemento = getElement()
@@ -67,5 +71,13 @@ btAdivina.addEventListener('click', function (event) {
     img.classList.add('recurso')
 
     div.appendChild(img)
+    if (pertenecePelicula(elemento, peliPortada)) {
+        img.parentElement.classList.add('pertenece');
+    } else {
+        img.parentElement.classList.add('no');
+    }
     divElementos.appendChild(div)
 })
+
+
+
