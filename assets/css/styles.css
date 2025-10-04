@@ -1,0 +1,64 @@
+html, body {
+    margin: 0px;
+    background-color: #5b6363;
+    color: white;
+}
+
+.titulo {
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.pelicula {
+    position: relative;
+    width: 200px;
+    left: 65px;
+}
+
+.elemento {
+    position: relative;
+    background-color: black;
+    width: 210px;
+    height: 310px;
+    left: 100px;
+    margin-left: -35px;
+    float:left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: azure;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+.recurso {
+    width: 200px;
+}
+
+#elementos-pelicula, #pelicula-caratula {
+    height: 320px;
+}
+
+#container {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .draggable {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: lightblue;
+    cursor: grab;
+    border: 1px solid #000;
+  }
+  
+  .draggable.dragging {
+    opacity: 0.5;
+    background-color: lightgreen;
+  }
+  
