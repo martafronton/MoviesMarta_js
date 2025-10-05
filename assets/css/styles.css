@@ -12,6 +12,11 @@ html, body {
     font-size: 25px;
 }
 
+#resultado{
+    margin-left:100px;
+    margin-bottom:100px;
+}
+
 .pelicula {
     position: relative;
     width: 200px;
