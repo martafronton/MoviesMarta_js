@@ -43,15 +43,18 @@ const getElement = () => {
 
 
 const btNuevoJuego = document.getElementById('btNuevoJuego')
-const contenedorImagen = document.getElementById('pelicula-caratula')
+const imagen = document.getElementById('pelicula')
 const btAdivina = document.getElementById('btAdivina')
 const divElementos = document.querySelector("#elementos-pelicula")
 
 btNuevoJuego.addEventListener('click', function (event) {
     let movie = getMovie();
-    contenedorImagen.innerHTML = `<img class="elemento" src="assets/movies/${movie}.jpg" alt="Carátula">`
+    imagen.src = `assets/movies/${movie}.jpg`
     divElementos.innerHTML = ""
     elementDeck = getElementsDeck()
+    contenedorDrop.forEach(drop => {
+        drop.innerHTML = ""
+    })
     event.stopPropagation();
 })
 
@@ -61,23 +64,59 @@ const pertenecePelicula = (recurso, pelicula) => {
     return recurso.substring(0, 2) === pelicula.substring(0, 2)
 }
 
-btAdivina.addEventListener('click', function (event) {
+
+const contenedorDrop = document.querySelectorAll('.drop')
+let elementoArrastrado = null
+
+btAdivina.addEventListener('click', function () {
     const elemento = getElement()
 
     const div = document.createElement('div')
-    div.classList.add('elemento')
+    div.classList.add('elemento', 'draggable')
+    div.draggable = true
     const img = document.createElement('img')
     img.src = `assets/characters/${elemento}.jpg`
     img.classList.add('recurso')
 
     div.appendChild(img)
     if (pertenecePelicula(elemento, peliPortada)) {
-        img.parentElement.classList.add('pertenece');
-    } else {
-        img.parentElement.classList.add('no');
+        div.classList.add('pertenece')
     }
     divElementos.appendChild(div)
+
+   
+    const draggables = document.querySelectorAll('.draggable')
+    draggables.forEach(tarjeta => {
+        tarjeta.addEventListener('dragstart', (e) => {
+            tarjeta.classList.add('dragging')
+            elementoArrastrado = tarjeta
+            e.dataTransfer.effectAllowed = "move"
+        })
+        tarjeta.addEventListener('dragend', () => {
+            tarjeta.classList.remove('dragging')
+            elementoArrastrado = null
+        })
+    })
 })
 
 
+contenedorDrop.forEach(contenedorDrop => {
+    contenedorDrop.addEventListener('dragover', (e) => {
+        e.preventDefault()
+    })
 
+    contenedorDrop.addEventListener('drop', (e) => {
+        e.preventDefault()
+        if (contenedorDrop.children.length > 0) {
+            return
+        }
+
+        if (elementoArrastrado.classList.contains('pertenece')) {
+            contenedorDrop.appendChild(elementoArrastrado)
+            elementoArrastrado.classList.add("correcto")
+            elementoArrastrado.classList.remove('draggable')
+        } else {
+            elementoArrastrado.classList.add("incorrecto")
+        }
+    })
+})

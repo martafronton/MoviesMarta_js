@@ -43,6 +43,11 @@ html, body {
     height: 320px;
 }
 
+#pelicula-caratula .row {
+    display: flex;
+    justify-content: center;
+  }
+
 #container {
     width: 300px;
     padding: 10px;
@@ -62,5 +67,25 @@ html, body {
     background-color: lightgreen;
   }
 
+.drop{
+    background-color:rgb(56, 56, 56);
+    height: 310px;  
+    width:230px;
+    margin-left:120px;
+    border-radius: 10px;
+}
+
+
+.correcto{
+    border-width:5px;
+    border-color:green;
+    margin: 0;
+    position: static;
+}
+
+.incorrecto{
+    border-width:5px;
+    border-color:red;
+}
 
   
