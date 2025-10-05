@@ -6,6 +6,10 @@ const NMOVIES = 5
 const NELEMENTSPMOVIE = 3
 let index = 1
 let peliPortada="01M";
+const intentos=document.getElementById("intentos")
+const vidas=5
+let contador=vidas
+intentos.innerHTML=`Vidas: ${vidas}`
 
 const getElementsDeck = () => {
     let elementDeck = []
@@ -48,6 +52,8 @@ const btAdivina = document.getElementById('btAdivina')
 const divElementos = document.querySelector("#elementos-pelicula")
 
 btNuevoJuego.addEventListener('click', function (event) {
+    contador=vidas
+    intentos.innerHTML=`Vidas: ${contador}`
     let movie = getMovie();
     imagen.src = `assets/movies/${movie}.jpg`
     divElementos.innerHTML = ""
@@ -111,12 +117,18 @@ contenedorDrop.forEach(contenedorDrop => {
             return
         }
 
+        if(contador == 0){
+            alert("No tienes más vidas, prueba con otra película")
+        }else{
         if (elementoArrastrado.classList.contains('pertenece')) {
             contenedorDrop.appendChild(elementoArrastrado)
             elementoArrastrado.classList.add("correcto")
             elementoArrastrado.classList.remove('draggable')
         } else {
             elementoArrastrado.classList.add("incorrecto")
+            contador--
+            intentos.innerHTML=`Vidas: ${contador}`
         }
+    }
     })
 })
